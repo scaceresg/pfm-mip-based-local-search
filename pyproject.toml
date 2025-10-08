@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=78.0.1", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pfm-mip-based-local-search"
+version = "0.1.0"
+description = "A Python package for solving the PFM using MIP-based local search."
+authors = [
+    {name = "Sebastian Caceres-Gelvez", email = "s.caceresgelvez@lancaster.ac.uk"},
+    {name = "Thu H. Dang", email = "t.h.dang@lancaster.ac.uk"},
+    {name = "Adam N. Letchford", email = "a.n.letchford@lancaster.ac.uk"}
+]
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=2.2.4",
+    "pandas>=2.2.3",
+    # Note: docplex requires IBM CPLEX license for commercial use
+    "docplex>=2.23.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "black>=24.10.0",
+    "isort>=5.13.2", 
+    "types-setuptools>=75.1.0.20241025",
+]
+
+[project.urls]
+Repository = "https://github.com/scaceresg/pfm-mip-based-local-search"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"pfm_mip_based_local_search" = ["py.typed"]
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.black]
+line-length = 90
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.tox
+  | \.venv
+  | build
+  | dist
+)/
+'''
+
+# isort import sorting
+[tool.isort]
+profile = "black"
+multi_line_output = 3
+line_length = 90
+known_first_party = ["pfm_mip_based_local_search"]
+
+# Project-specific requirements and licensing notes
+[tool.project-requirements]
+# IBM CPLEX Optimization Studio must be installed separately
+# Academic license: Free for academic use
+# Commercial license: Required for commercial/production use
+# See: https://www.ibm.com/products/ilog-cplex-optimization-studio
